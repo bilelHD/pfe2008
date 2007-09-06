@@ -2,3 +2,11 @@
   * http://themarvinproject.free.fr/final/node4.html
   * http://maxwell.me.gu.edu.au/spl/publications/papers/merc03_ben.pdf
   * http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf
+
+=FFT=
+  * http://www.polytech.unice.fr/~leroux/courssignal/node73.html
+  * [http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/ref/fft.html&http://www.google.com/search?client=opera&rls=fr&q=matlab+fft&sourceid=opera&ie=utf-8&oe=utf-8 Bon exemple en matlab pour comprendre la fft (et comment etendre le resultat)]
+
+
+
+
