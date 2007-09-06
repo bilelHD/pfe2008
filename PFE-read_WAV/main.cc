@@ -9,16 +9,13 @@ using namespace std;
 int		main(int argc, char *argv[])
 {
     Wav*		   wav = new Wav("ane.wav");
+
 	fftw_complex*  out;
-	fftw_plan p;
 
-	out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * wav->data_length_get ());
-	p = fftw_plan_dft_r2c_1d(wav->data_length_get (), wav->data_get (), out, FFTW_ESTIMATE);
-
-	fftw_execute(p);
+	out = wav->compute_fft (0);
 	
-	for (int i = 0; i < wav->data_length_get () / 2 + 1; ++i)
-		std::cout << i << " " << sqrt (out[i][0] * out[i][0] + out[i][1] * out[i][1]) << " # " << out[i][0] << " + " << out[i][1] << "i" << std::endl;
+	for (int i = 0; i < wav->split_length_get (0) / 2 + 1; ++i)
+		std::cout << i * (double) wav->header_get().nSamplesPerSec / (double) wav->split_length_get (0) << " " << sqrt (out[i][0] * out[i][0] + out[i][1] * out[i][1]) << " # " << out[i][0] << " + " << out[i][1] << "i" << std::endl;
 
     return EXIT_SUCCESS;
 }
