@@ -27,21 +27,21 @@ union u_int_value
 */
 struct  			s_header
 {
- char      			rID[4];
- int       			rLen ;
- char      			wID[4];
+    char      		rID[4];
+    int       		rLen ;
+    char      		wID[4];
  
- char      			fId[4];
- int       			fLen;
- unsigned short     wFormatTag;
- unsigned short     nChannels;
- int				nSamplesPerSec;
- int                nAvgBytesPerSec;
- unsigned short     nBlockAlign;
- unsigned short     nBitsPerSample;
+    char      		fId[4];
+    int       		fLen;
+    unsigned short  wFormatTag;
+    unsigned short  nChannels;
+    int				nSamplesPerSec;
+    int             nAvgBytesPerSec;
+    unsigned short  nBlockAlign;
+    unsigned short  nBitsPerSample;
 
- char     			dId[4];
- int       			dLen;
+    char     		dId[4];
+    int       		dLen;
 };
 
 /*
