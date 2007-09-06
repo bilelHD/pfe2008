@@ -1,7 +1,8 @@
-#include "wav.hh"
 #include <string.h>
 #include <stdlib.h>
-
+#include <math.h>
+#include "wav.hh"
+#include "define.hh"
 /*
 ** Constructor
 */
@@ -11,6 +12,7 @@ Wav::Wav(std::string filename)
     short*          data_short = 0;
     int*         	data_int = 0;
     unsigned char*  data_char = 0;
+    unsigned int	max_amplitude;
  
     if (!(file = fopen(filename.c_str (), "rb")))
     {
@@ -28,8 +30,9 @@ Wav::Wav(std::string filename)
   
         // Storing data from file
         fread(data_char, 1, data_length_, file);
+        max_amplitude = (unsigned int) pow(2, 8) - 1;
         for (int i = 0; i < data_length_; ++i)
-            data_[i] = (double) (data_char[i]) / 255;
+            data_[i] = (double) (data_char[i]) / max_amplitude;
     }
     // 16 bits (= 2 bytes) per sample
     else if (header_.nBitsPerSample == 16)
@@ -40,8 +43,9 @@ Wav::Wav(std::string filename)
 
         // Storing data from file
         std::cout << fread(data_short, 2, data_length_, file) << std::endl;
+        max_amplitude = (unsigned int) pow(2, 15);
         for (int i = 0; i < data_length_; ++i)
-            data_[i] = (double) (data_short[i]) / 32768;
+            data_[i] = (double) (data_short[i]) / max_amplitude;
     }
     // 32 bits (= 4 bytes) per sample
     else if (header_.nBitsPerSample == 32)
@@ -52,11 +56,18 @@ Wav::Wav(std::string filename)
 
         // Storing data from file
         fread(data_int, 4, data_length_, file);
+        max_amplitude = (unsigned int) pow(2, 31);
         for (int i = 0; i < data_length_; ++i)
-            data_[i] = (double) (data_int[i]) / 2147483648;
+            data_[i] = (double) (data_int[i]) / max_amplitude;
     }
 
-    fclose(file);
+	// compute splits information
+	double  sample_duration_ms = (double) CONVERT_SEC_TO_MSEC(1) / header_.nSamplesPerSec;
+
+	samples_per_split_ = (int) (SPLIT_TIME_MS / sample_duration_ms);
+	nb_splits_ = data_length_ / samples_per_split_;
+
+	fclose(file);
 }
 
 /*
@@ -66,6 +77,54 @@ Wav::~Wav()
 {
     if (data_)
         delete(data_);
+}
+
+/*
+** Wav::split_length_get
+*/
+int Wav::split_length_get (int split_index)
+{
+	if (split_index == nb_splits_ - 1)
+	    return samples_per_split_ + (data_length_ % samples_per_split_);
+	return samples_per_split_;
+}
+
+/*
+** Wav::compute_caracteristics_vectors
+*/
+void	Wav::compute_caracteristics_vectors ()
+{
+
+}
+
+/*
+**
+*/
+fftw_complex*	Wav::compute_fft(int split_index)
+{
+    fftw_complex*	out;
+    fftw_plan 		p;
+    int             split_length = split_length_get (split_index);
+    
+	out = (fftw_complex*) fftw_malloc (sizeof(fftw_complex) * split_length);
+	p = fftw_plan_dft_r2c_1d (split_length, data_ + split_index * samples_per_split_, out, FFTW_ESTIMATE);
+
+	fftw_execute(p);
+	return out;
+}
+
+/*
+**
+*/
+void	Wav::compute_mel_scale(fftw_complex* data)
+{
+	double f;
+
+	for (int i = 0; data_length_; ++i)
+	{
+		f = sqrt (data[i][0] * data[i][0] + data[i][1] * data[i][1]);
+	    data[i][0] = 2595 * log10 (1 + (f / 700));
+	}
 }
 
 /*
@@ -138,5 +197,5 @@ std::ostream& operator<<(std::ostream& out, s_header& h)
 std::ostream& operator<<(std::ostream& out, Wav& wav)
 {
     for (int i = 0; i < wav.data_length_get (); ++i)
-        std::cout << i << " " << wav.data_get()[i] << std::endl;
+        	std::cout << i << " " << wav.data_get()[i] << std::endl;
 }

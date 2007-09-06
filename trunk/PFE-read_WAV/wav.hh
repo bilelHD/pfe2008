@@ -3,6 +3,8 @@
 
 # include <iostream>
 # include <string>
+# include <fftw3.h>
+# include "types.hh"
 
 /*
 ** PCM format from: http://www.freesoundeditor.com/incagen.html?docwave.htm~main
@@ -58,12 +60,27 @@ class	Wav
 
 		s_header&       header_get() { return header_; }
 		double*			data_get() { return data_; }
+		int				nb_splits_get () { return nb_splits_; };
+		int             samples_per_split_get () { return samples_per_split_; };
 		int				data_length_get() { return data_length_; }
 
+		int             split_length_get (int split_index);
+		
+		void            compute_caracteristics_vectors();
+		fftw_complex*	compute_fft(int split_index);
+		void            compute_mel_scale(fftw_complex* data);
+		double       	apply_filter (fftw_complex* data, int x_start, double height, int width);
+		v_double*       apply_all_filters (fftw_complex* data);
+		
+
+
  private:
-		s_header       header_;
-		int            data_length_;
-		double*		   data_;
+		s_header       						header_;
+		int            						data_length_;
+		double*		   						data_;
+		std::vector<v_double>				cv_;
+		int                                 nb_splits_;
+		int                                 samples_per_split_;
 };
 
 std::ostream& operator<<(std::ostream& out, Wav& wav);

@@ -1,7 +1,7 @@
 [Project]
 FileName=read_WAV.dev
 Name=read_WAV
-UnitCount=3
+UnitCount=5
 Type=1
 Ver=1
 ObjFiles=
@@ -69,6 +69,26 @@ BuildCmd=
 
 [Unit3]
 FileName=wav.cc
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=define.hh
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=types.hh
 CompileCpp=1
 Folder=
 Compile=1
