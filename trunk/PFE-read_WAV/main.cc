@@ -8,7 +8,7 @@ using namespace std;
 
 int		main(int argc, char *argv[])
 {
-	Wav*		   wav = new Wav("ane.wav");
+    Wav*		   wav = new Wav("ane.wav");
 	fftw_complex*  out;
 	fftw_plan p;
 
