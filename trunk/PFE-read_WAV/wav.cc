@@ -42,7 +42,6 @@ Wav::Wav(std::string filename)
         data_ = new double[data_length_];
 
         // Storing data from file
-        std::cout << fread(data_short, 2, data_length_, file) << std::endl;
         max_amplitude = (unsigned int) pow(2, 15);
         for (int i = 0; i < data_length_; ++i)
             data_[i] = (double) (data_short[i]) / max_amplitude;
@@ -114,18 +113,76 @@ fftw_complex*	Wav::compute_fft(int split_index)
 }
 
 /*
-**
+** Wav::compute_mel_scale
 */
-void	Wav::compute_mel_scale(fftw_complex* data)
+void	Wav::compute_mel_scale (fftw_complex* data, int split_index)
 {
-	double f;
-
-	for (int i = 0; data_length_; ++i)
+	double     f;
+    int        split_length = split_length_get (split_index);
+    
+	for (int i = 0; i < split_length; ++i)
 	{
 		f = sqrt (data[i][0] * data[i][0] + data[i][1] * data[i][1]);
 	    data[i][0] = 2595 * log10 (1 + (f / 700));
 	}
 }
+
+/*
+** Wav::interpole
+*/
+double     Wav::interpole (fftw_complex* data, double x)
+{
+    return (data[(int) ceil (x)][0] + data[(int) floor (x)][0]) * (x - floor (x));
+}
+
+/*
+** Wav::apply_filter
+*/
+double  Wav::apply_filter (fftw_complex* data, int split_index, double x_start, double height, double width, double end_index)
+{
+    int     split_length = split_length_get (split_index);
+    double  second_length = width;
+    double  sum = 0;
+
+    // The current filter is the last one
+    if (x_start + width + STEP_FILTER + 2 * (width + STEP_FILTER) > end_index)
+        second_length = end_index - (x_start + width);
+
+    // First half of area
+    for (double i = x_start; i < x_start + width; ++i)
+        sum += (height * i / width) * interpole (data, i);
+
+    // Second half of area
+    for (double i = 0; i < second_length; ++i)
+        sum += (height * i / second_length) * interpole (data, x_start + width + i);
+
+    std::cout << x_start << " 0" << std::endl;
+    std::cout << x_start + width << " " << height << " # width=" << width << std::endl;
+    std::cout << x_start + width + second_length << " 0" << std::endl;
+
+    return sum;
+}
+
+/*
+** Wav::apply_all_filters
+*/
+v_double*   Wav::apply_all_filters (fftw_complex* data, int split_index)
+{
+    int         split_length = split_length_get (split_index);
+    v_double*   res = new v_double;
+    double      coeff = (double) header_get().nSamplesPerSec / (double) split_length_get (split_index);
+    int         start_index = START_FREQ / (int) coeff;
+    int         end_index = END_FREQ / (int) coeff;
+    double      width = (end_index - start_index) / (NB_FILTERS + 1) - STEP_FILTER * ((double) (NB_FILTERS)  / 2);
+
+    for (double i = start_index; i + 2 * width < end_index; i += width)
+    {
+        res->insert (res->end (), apply_filter (data, split_index, i, 2, width, end_index));       
+        width += STEP_FILTER;
+    }
+    return res;        
+}
+
 
 /*
 ** little_to_big: conversion from little endian to big endian for SHORT
