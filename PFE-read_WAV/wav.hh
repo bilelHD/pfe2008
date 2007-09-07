@@ -53,7 +53,7 @@ class	Wav
 {
  public:
 		Wav(std::string filename);
-		~Wav();
+        ~Wav();
 
  		short 			little_to_big (short i);
 		int 			little_to_big (int i);
@@ -68,9 +68,10 @@ class	Wav
 		
 		void            compute_caracteristics_vectors();
 		fftw_complex*	compute_fft(int split_index);
-		void            compute_mel_scale(fftw_complex* data);
-		double       	apply_filter (fftw_complex* data, int x_start, double height, int width);
-		v_double*       apply_all_filters (fftw_complex* data);
+		void            compute_mel_scale(fftw_complex* data, int split_index);
+		double       	apply_filter (fftw_complex* data, int split_index, double x_start, double height, double width, double end_index);
+		v_double*       apply_all_filters (fftw_complex* data, int split_index);
+        double          interpole (fftw_complex* data, double x);
 		
 
 
