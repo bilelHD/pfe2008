@@ -156,9 +156,9 @@ double  Wav::apply_filter (fftw_complex* data, int split_index, double x_start, 
     for (double i = 0; i < second_length; ++i)
         sum += (height * i / second_length) * interpole (data, x_start + width + i);
 
-    std::cout << x_start << " 0" << std::endl;
+    /*std::cout << x_start << " 0" << std::endl;
     std::cout << x_start + width << " " << height << " # width=" << width << std::endl;
-    std::cout << x_start + width + second_length << " 0" << std::endl;
+    std::cout << x_start + width + second_length << " 0" << std::endl;*/
 
     return sum;
 }
@@ -177,12 +177,35 @@ v_double*   Wav::apply_all_filters (fftw_complex* data, int split_index)
 
     for (double i = start_index; i + 2 * width < end_index; i += width)
     {
-        res->insert (res->end (), apply_filter (data, split_index, i, 2, width, end_index));       
+        res->insert (res->end (), apply_filter (data, split_index, i, FILTER_HEIGHT, width, end_index));
         width += STEP_FILTER;
     }
     return res;        
 }
 
+/*
+**
+*/
+v_double&    Wav::compute_dct(v_double &mel_coeffs)
+{
+	v_double*   res = new v_double;
+	int         N = mel_coeffs.size ();
+
+	for (int k = 0; k < N; ++k)
+	{
+		double  res_k = 0;
+		
+		for (int n = 0; n < N; ++n)
+		{
+			double	w_n = (n == 0) ? sqrt ((double) 1 / N) : sqrt ((double) 2 / N);
+			double	cos_nk = cos ((PI * (2 * (n + 1) - 1) * (k - 1)) / (2 * N));
+
+			res_k += w_n * mel_coeffs[n] * cos_nk;
+		}
+		(*res).push_back(res_k);
+	}
+	return *res;
+}
 
 /*
 ** little_to_big: conversion from little endian to big endian for SHORT
