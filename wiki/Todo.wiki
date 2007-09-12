@@ -1,0 +1,26 @@
+=Modèle acoustique=
+ ==Calcul des MFCC==
+|| || *Coded* || *Tested* ||
+|| FFT || OK || *NO* ||
+|| MEL || OK || *NO* ||
+|| FILTERS || OK || *NO* ||
+|| DCT || OK || *NO* ||
+
+=Modèle linguistique=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
