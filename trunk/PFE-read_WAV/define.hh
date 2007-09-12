@@ -8,9 +8,12 @@
 */
 # define    START_FREQ          200
 # define    END_FREQ            3500
-# define    NB_FILTERS          5
+# define    NB_FILTERS          20
 # define    STEP_FILTER         0.2
+# define 	FILTER_HEIGHT       10
 
 # define    CONVERT_SEC_TO_MSEC(t) 1000 * t
+
+# define    PI                  3.14159265
 
 #endif /* DEFINE_HH_ */

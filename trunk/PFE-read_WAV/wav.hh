@@ -72,6 +72,7 @@ class	Wav
 		double       	apply_filter (fftw_complex* data, int split_index, double x_start, double height, double width, double end_index);
 		v_double*       apply_all_filters (fftw_complex* data, int split_index);
         double          interpole (fftw_complex* data, double x);
+        v_double&		compute_dct(v_double &mel_coeffs);
 		
 
 
