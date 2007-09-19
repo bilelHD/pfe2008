@@ -4,9 +4,18 @@
   * http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf
   * http://www.d.umn.edu/~cprince/PubRes/EpiRob06/pdf/FeaturalProcessing.pdf
 
+  * [http://140.114.76.148/jang/matlab/toolbox/audioProcessing/html/audioProcessing/index.html Sources matlab de calcul de mfcc]
+[http://search.cpan.org/src/DJHD/Speech-Recognizer-SPX-0.0801/FE/ Sources Perl de calcul de mfcc]
+
+[http://www.wcl.ee.upatras.gr/ai/papers/ganchev17.pdf Comparaison de différentes implémentation du calcul des mfcc]
+
+[http://www.eurasip.org/content/Eusipco/1996/paper/psr_13.pdf Sur le calcul des mfcc... parle de HTK... je sais pas si c'est utile]
+
 =FFT=
   * http://www.polytech.unice.fr/~leroux/courssignal/node73.html
   * [http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/ref/fft.html&http://www.google.com/search?client=opera&rls=fr&q=matlab+fft&sourceid=opera&ie=utf-8&oe=utf-8 Bon exemple en matlab pour comprendre la fft (et comment etendre le resultat)]
 
 
 
+ 
+ 
