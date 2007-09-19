@@ -42,10 +42,14 @@ Wav::Wav(std::string filename)
         data_ = new double[data_length_];
 
         // Storing data from file
+        fread(data_short, 2, data_length_, file);
         max_amplitude = (unsigned int) pow(2, 15);
         for (int i = 0; i < data_length_; ++i)
+        {
             data_[i] = (double) (data_short[i]) / max_amplitude;
-    }
+			//std::cout << data_[i] << std::endl;
+		}
+	}
     // 32 bits (= 4 bytes) per sample
     else if (header_.nBitsPerSample == 32)
     {
@@ -64,6 +68,7 @@ Wav::Wav(std::string filename)
 	double  sample_duration_ms = (double) CONVERT_SEC_TO_MSEC(1) / header_.nSamplesPerSec;
 
 	samples_per_split_ = (int) (SPLIT_TIME_MS / sample_duration_ms);
+	/*std::cout << "sample_per_split : " << samples_per_split_  << std::endl;*/
 	nb_splits_ = data_length_ / samples_per_split_;
 
 	fclose(file);
@@ -198,7 +203,31 @@ v_double&    Wav::compute_dct(v_double &mel_coeffs)
 		for (int n = 0; n < N; ++n)
 		{
 			double	w_n = (n == 0) ? sqrt ((double) 1 / N) : sqrt ((double) 2 / N);
-			double	cos_nk = cos ((PI * (2 * (n + 1) - 1) * (k - 1)) / (2 * N));
+			double	cos_nk = cos ((PI * (2 * (n + 1) - 1) * ((k + 1) - 1)) / (2 * N));
+
+			res_k += w_n * mel_coeffs[n] * cos_nk;
+		}
+		(*res).push_back(res_k);
+	}
+	return *res;
+}
+
+/*
+**
+*/
+v_double&    Wav::compute_dct2(v_double &mel_coeffs)
+{
+	v_double*   res = new v_double;
+	int         N = mel_coeffs.size ();
+
+	for (int k = 0; k < N; ++k)
+	{
+		double  res_k = 0;
+
+		for (int n = 0; n < N; ++n)
+		{
+			double	w_n = sqrt ((double) 2 / N);
+			double	cos_nk = cos ((PI * ((n + 1) - 0.5) * (k + 1)) / N);
 
 			res_k += w_n * mel_coeffs[n] * cos_nk;
 		}
