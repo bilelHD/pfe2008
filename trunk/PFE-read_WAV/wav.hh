@@ -74,8 +74,15 @@ class	Wav
         double          interpole (fftw_complex* data, double x);
         v_double&		compute_dct(v_double &mel_coeffs);
         v_double&    	compute_dct2(v_double &mel_coeffs);
-		
+        
+        // Conversion methods
+        double          mel_to_freq (double mel);
+        double          freq_to_mel (double freq);
 
+        // Methods related to MATLAB algorithm
+        v_double&       tri_band_filters (fftw_complex* fftmag, v_int& start, v_int& center, v_int& end);
+        v_int_int&      get_filters_bank_params ();
+		
 
  private:
 		s_header       						header_;

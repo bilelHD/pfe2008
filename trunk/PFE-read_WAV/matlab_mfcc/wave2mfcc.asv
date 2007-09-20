@@ -28,10 +28,10 @@ if nargin<2; fs=8000; end
 if nargin<3, FP=setFeatureParam(fs); end
 
 y=double(y);    % Convert to double
-y=y-mean(y);    % Shift to zero mean
+%y=y-mean(y);    % Shift to zero mean
 
 % ====== First Step : pre-emphasis.
-y = filter([1, -0.95], 1, y);
+%y = filter([1, -0.95], 1, y);
 
 % ====== Second Step: frame blocking.
 framedY = buffer2(y, FP.frameSize, FP.overlap);
@@ -45,25 +45,25 @@ for i = 1:size(framedY, 2),
     Wframe  = hamming(FP.frameSize).*framedY(:,i);
    
     % ====== Forth Step: fast fourier transform.
-    fftMag = abs(fft(WFr));
-    if (i == 1)
-        fprintf('%s\n', fftMag);
-        fprintf('FIN\n');
-    end
+    fftMag = abs(fft(framedY(:,i), 80));
+    %if (i == 1)
+    %    fprintf('%s\n', fftMag);
+    %    fprintf('FIN\n');
+    %end
     halfIndex = floor((FP.frameSize+1)/2);
     fftMag = fftMag(1:halfIndex);
     fftMag = interp1(1:halfIndex,fftMag,1:1/FP.alpha:halfIndex)';    % VTLN
     fftMag = [fftMag;zeros(halfIndex-length(fftMag),1)];
-    if (i == 1)
-        % fprintf('%s\n', fftMag);
-    end
+    
     % ====== Fifth Step: triangular bandpass filter.
 %    tbfCoef = triBandFilter(fftMag, FP.filterNum, fstart, fcenter, fstop);
     tbfCoef = triBandFilter(fftMag, FP.filterNum, filterBankParam);
    
     % ====== Sixth Step: cosine transform. (Using DCT to get L order mel-scale-cepstrum parameters.)
     mfcc = melCepstrum(FP.mfccDim, FP.filterNum, tbfCoef);
-    
+    if (i == 1)
+        fprintf('%s\n', mfcc);
+    end
     parameter = [parameter mfcc'];
 end
 
@@ -178,6 +178,7 @@ function out = buffer2(y, frameSize, overlap)
 
 %    Roger Jang, 20010908
 
+
 if nargin<3, overlap=0; end
 if nargin<2, frameSize=256; end
 
@@ -202,10 +203,14 @@ if nargin<3, filterNum=20; end
 if nargin<4, plotOpt=0; end
 
 maxMelFreq = freq2mel(fs/2);
+
 sideWidth=maxMelFreq/(filterNum+1);
 index=0:filterNum-1;
+
 filterBankParam=floor(mel2freq([index; index+1; index+2]*sideWidth)/fs*frameSize)+1;
 filterBankParam(end, end)= frameSize/2;    % ??????
+
+fprintf ('%d\n', filterBankParam);
 
 if plotOpt
     subplot(2,1,1);

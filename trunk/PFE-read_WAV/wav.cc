@@ -237,6 +237,72 @@ v_double&    Wav::compute_dct2(v_double &mel_coeffs)
 }
 
 /*
+** tri_band_filters: computes tri-band filters
+*/
+v_double&   Wav::tri_band_filters (fftw_complex* fftmag, v_int& start, v_int& center, v_int& end)
+{   
+    v_double*   res = new v_double;
+    v_double*   filtermag = new v_double;
+    int         i;
+    int         j;
+
+    for (i = 0; i < NB_FILTERS; ++i)
+    {
+        double  sum = 0;
+
+        filtermag->clear ();
+        printf("1 from %d to %d\n", start[i], center[i]);
+        for (j = start[i]; j <= center[i]; ++j)
+            filtermag->push_back ((j - start[i]) / (center[i] - start[i]));
+        printf("2\n");
+        for (j = center[i] + 1; j <= end[i]; ++j)
+            filtermag->push_back (1 - (j - center[i]) / (end[i] - center[i]));
+        
+        for (j = start[i]; j <= end[i]; ++j)
+            sum += fftmag[j][0] * (*filtermag)[j];
+        res->push_back (sum);
+    }
+    delete (filtermag);
+    return *res;
+}
+
+/*
+** mel_to_freq
+*/
+double      Wav::mel_to_freq (double mel)
+{
+    return 700 * (pow (10, (mel / 2595)) - 1);
+}
+
+/*
+** freq_to_mel
+*/
+double      Wav::freq_to_mel (double freq)
+{
+    return 2595 * log10 (1 + freq / 700);
+}
+
+/*
+** get_filters_bank_params: computes split indexes for each tri-band filter
+*/
+v_int_int&  Wav::get_filters_bank_params ()
+{
+    v_int_int*  res = new v_int_int;
+    double      max_mel_freq = freq_to_mel (header_.nSamplesPerSec / 2);
+    double      side_width = max_mel_freq / (NB_FILTERS + 1);
+
+    res->push_back (new v_int);
+    res->push_back (new v_int);
+    res->push_back (new v_int);
+    for (int i = 0; i < NB_FILTERS; ++i)
+    {        
+        for (int j = i; j < i + 3 && j < NB_FILTERS; ++j)
+            (*res)[j - i]->push_back (1 + (int) floor (mel_to_freq (j * side_width) / header_.nSamplesPerSec * samples_per_split_));
+    }
+    return *res;    
+}
+
+/*
 ** little_to_big: conversion from little endian to big endian for SHORT
 */
 short Wav::little_to_big(short i)
