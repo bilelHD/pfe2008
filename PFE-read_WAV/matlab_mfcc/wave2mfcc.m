@@ -111,6 +111,9 @@ fcenter=filterBankParam(2,:);
 fstop=filterBankParam(3,:);
 % Triangular bandpass filter.
 for i=1:P
+    if (i == 1)
+   fprintf ('Pouet : start = %d  center = %d\n', fstart(i), fcenter(i));
+    end
    for j = fstart(i):fcenter(i),
       filtmag(j) = (j-fstart(i))/(fcenter(i)-fstart(i));
    end
@@ -203,10 +206,19 @@ if nargin<3, filterNum=20; end
 if nargin<4, plotOpt=0; end
 
 maxMelFreq = freq2mel(fs/2);
+
 sideWidth=maxMelFreq/(filterNum+1);
 index=0:filterNum-1;
+
 filterBankParam=floor(mel2freq([index; index+1; index+2]*sideWidth)/fs*frameSize)+1;
+
+fprintf ('DAAAAAAAAAAAAAAAAA 1\n');
+fprintf ('%d\n', filterBankParam);
 filterBankParam(end, end)= frameSize/2;    % ??????
+fprintf ('DAAAAAAAAAAAAAAAAA 2\n');
+fprintf ('%d\n', filterBankParam);
+fprintf ('DAAAAAAAAAAAAAAAAA 3\n');
+
 
 if plotOpt
     subplot(2,1,1);
