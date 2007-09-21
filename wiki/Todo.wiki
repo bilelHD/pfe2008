@@ -1,6 +1,11 @@
 ===21 Septembre 2007===
-  * MRCC : Faire fonctionner le programme PERL [http://www.mezimages.com/up/09/543337-button_ok.gif]
-  * MFCC : Obtenir le meme resultat que le programme matlab.
+  * MFCC : Faire fonctionner le programme PERL [http://www.mezimages.com/up/09/543341-button_cancel.gif]
+  * MFCC : Obtenir le meme resultat que le programme matlab. [http://www.mezimages.com/up/09/543337-button_ok.gif]
 
+ 
+ 
+ 
+ 
+ 
  
  
