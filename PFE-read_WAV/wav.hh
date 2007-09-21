@@ -82,6 +82,8 @@ class	Wav
         // Methods related to MATLAB algorithm
         v_double&       tri_band_filters (fftw_complex* fftmag, v_int& start, v_int& center, v_int& end);
         v_int_int&      get_filters_bank_params ();
+        int             start_split_get (int split_index);
+        fftw_complex*	compute_fft2 (int split_index);
 		
 
  private:
@@ -91,6 +93,7 @@ class	Wav
 		std::vector<v_double>				cv_;
 		int                                 nb_splits_;
 		int                                 samples_per_split_;
+        int                                 overlap_;
 };
 
 std::ostream& operator<<(std::ostream& out, Wav& wav);
