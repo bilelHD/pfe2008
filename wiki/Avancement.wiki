@@ -6,10 +6,10 @@
   * MFCC = FFT + MEL + FILTERS + DCT
 
 || || *Codé* || *Testé* ||
-|| FFT || OK || *NON* ||
-|| MEL || OK || *NON* ||
-|| FILTERS || OK || *NON* ||
-|| DCT || OK || *NON* ||
+|| FFT || [http://www.mezimages.com/up/09/543337-button_ok.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
+|| MEL || [http://www.mezimages.com/up/09/543337-button_ok.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
+|| FILTERS || [http://www.mezimages.com/up/09/543337-button_ok.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
+|| DCT || [http://www.mezimages.com/up/09/543337-button_ok.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
 
 ==HMM utilisant les MFCC==
   * Un HMM par phonème
@@ -18,10 +18,10 @@
   * Transitions = proba de passage d'un coeff à l'autre
 
 || || *Codé* || *Testé* ||
-|| Compréhension/validation du principe (ci-dessus) || *NON* || *NON* ||
-|| Determination base d'apprentissage || *NON* || *NON* ||
-|| [[HTK]] Apprentissage (détermination des transitions)|| *NON* || *NON* ||
-|| Application à la reconnaissance de phonèmes || *NON* || *NON* ||
+|| Compréhension/validation du principe (ci-dessus) || [http://www.mezimages.com/up/09/543341-button_cancel.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
+|| Determination base d'apprentissage || [http://www.mezimages.com/up/09/543341-button_cancel.gif] || *[http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
+|| [[HTK]] Apprentissage (détermination des transitions)|| [http://www.mezimages.com/up/09/543341-button_cancel.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
+|| Application à la reconnaissance de phonèmes || [http://www.mezimages.com/up/09/543341-button_cancel.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
 
 ==HMM utilisant les Phonèmes==
 ...
@@ -66,4 +66,6 @@
 
 
 
+ 
+ 
  
