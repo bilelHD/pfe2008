@@ -67,9 +67,13 @@ Wav::Wav(std::string filename)
 	// compute splits information
 	double  sample_duration_ms = (double) CONVERT_SEC_TO_MSEC(1) / header_.nSamplesPerSec;
 
-	samples_per_split_ = (int) (SPLIT_TIME_MS / sample_duration_ms);
-	/*std::cout << "sample_per_split : " << samples_per_split_  << std::endl;*/
-	nb_splits_ = data_length_ / samples_per_split_;
+	/* initial computation formula: 
+    ** samples_per_split_ = (int) (SPLIT_TIME_MS / sample_duration_ms);
+    ** nb_splits_ = data_length_ / samples_per_split_;
+    */
+    samples_per_split_ = (int) ((double) header_.nSamplesPerSec / ((double) 8000 / 256));
+    overlap_ = (int) round ((double) samples_per_split_ / 3);
+    nb_splits_ = (int) floor ((data_length_ - overlap_) / (samples_per_split_ - overlap_));
 
 	fclose(file);
 }
@@ -94,6 +98,16 @@ int Wav::split_length_get (int split_index)
 }
 
 /*
+** Wav::start_split_get
+*/
+int Wav::start_split_get (int split_index)
+{
+    int     step = samples_per_split_ - overlap_;
+    
+    return split_index * step;
+}
+
+/*
 ** Wav::compute_caracteristics_vectors
 */
 void	Wav::compute_caracteristics_vectors ()
@@ -108,12 +122,32 @@ fftw_complex*	Wav::compute_fft(int split_index)
 {
     fftw_complex*	out;
     fftw_plan 		p;
-    int             split_length = split_length_get (split_index);
+    int            split_length = split_length_get (split_index);
     
 	out = (fftw_complex*) fftw_malloc (sizeof(fftw_complex) * split_length);
 	p = fftw_plan_dft_r2c_1d (split_length, data_ + split_index * samples_per_split_, out, FFTW_ESTIMATE);
 
 	fftw_execute(p);
+	return out;
+}
+
+/*
+**
+*/
+fftw_complex*	Wav::compute_fft2 (int split_index)
+{
+    fftw_complex*	out;
+    fftw_plan 		p;
+    int             start_split = start_split_get (split_index);
+    int             split_length = samples_per_split_;
+    
+	out = (fftw_complex*) fftw_malloc (sizeof(fftw_complex) * split_length);
+	p = fftw_plan_dft_r2c_1d (split_length, data_ + start_split, out, FFTW_ESTIMATE);
+	
+    fftw_execute(p);
+
+    for (int i = 0; i < split_length; ++i)
+        out[i][0] = sqrt (pow (out[i][0], 2) + pow (out[i][1], 2));
 	return out;
 }
 
@@ -251,15 +285,15 @@ v_double&   Wav::tri_band_filters (fftw_complex* fftmag, v_int& start, v_int& ce
         double  sum = 0;
 
         filtermag->clear ();
-        printf("1 from %d to %d\n", start[i], center[i]);
         for (j = start[i]; j <= center[i]; ++j)
-            filtermag->push_back ((j - start[i]) / (center[i] - start[i]));
-        printf("2\n");
-        for (j = center[i] + 1; j <= end[i]; ++j)
-            filtermag->push_back (1 - (j - center[i]) / (end[i] - center[i]));
+            filtermag->push_back (((double) j - start[i]) / ((double) center[i] - start[i]));
         
+        for (j = center[i] + 1; j <= end[i]; ++j)
+            filtermag->push_back (1 - ((double) j - center[i]) / ((double) end[i] - center[i]));
+
+
         for (j = start[i]; j <= end[i]; ++j)
-            sum += fftmag[j][0] * (*filtermag)[j];
+            sum += fftmag[j - 1][0] * (*filtermag)[j - start[i]];
         res->push_back (sum);
     }
     delete (filtermag);
@@ -295,10 +329,8 @@ v_int_int&  Wav::get_filters_bank_params ()
     res->push_back (new v_int);
     res->push_back (new v_int);
     for (int i = 0; i < NB_FILTERS; ++i)
-    {        
-        for (int j = i; j < i + 3 && j < NB_FILTERS; ++j)
+        for (int j = i; j < i + 3; ++j)
             (*res)[j - i]->push_back (1 + (int) floor (mel_to_freq (j * side_width) / header_.nSamplesPerSec * samples_per_split_));
-    }
     return *res;    
 }
 

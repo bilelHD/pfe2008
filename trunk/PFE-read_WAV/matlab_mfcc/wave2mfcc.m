@@ -34,6 +34,7 @@ y=double(y);    % Convert to double
 %y = filter([1, -0.95], 1, y);
 
 % ====== Second Step: frame blocking.
+
 framedY = buffer2(y, FP.frameSize, FP.overlap);
 
 %[fstart,fcenter,fstop] = getTriParam(FP.frameSize, fs, 0);    % Parameters for triangular filter bank
@@ -43,27 +44,28 @@ parameter = [];
 for i = 1:size(framedY, 2),
     % ====== Third Step: hamming window.
     Wframe  = hamming(FP.frameSize).*framedY(:,i);
-   
+
     % ====== Forth Step: fast fourier transform.
-    fftMag = abs(fft(framedY(:,i), 80));
-    %if (i == 1)
-    %    fprintf('%s\n', fftMag);
-    %    fprintf('FIN\n');
-    %end
+    fftMag = abs(fft(framedY(:,i)));
+    if (i == 1)
+        %fprintf('%s\n', fftMag);
+        %fprintf('FIN\n');
+    end
     halfIndex = floor((FP.frameSize+1)/2);
     fftMag = fftMag(1:halfIndex);
     fftMag = interp1(1:halfIndex,fftMag,1:1/FP.alpha:halfIndex)';    % VTLN
     fftMag = [fftMag;zeros(halfIndex-length(fftMag),1)];
-    
+
     % ====== Fifth Step: triangular bandpass filter.
 %    tbfCoef = triBandFilter(fftMag, FP.filterNum, fstart, fcenter, fstop);
     tbfCoef = triBandFilter(fftMag, FP.filterNum, filterBankParam);
-   
+
     % ====== Sixth Step: cosine transform. (Using DCT to get L order mel-scale-cepstrum parameters.)
     mfcc = melCepstrum(FP.mfccDim, FP.filterNum, tbfCoef);
     if (i == 1)
-        fprintf('%s\n', mfcc);
+        %fprintf('%s\n', mfcc);
     end
+
     parameter = [parameter mfcc'];
 end
 
@@ -94,7 +96,7 @@ FP=setFeatureParam(fs);
 FP.useDelta=0;
 mfcc0 = wave2mfcc(y, fs, FP);
 %mfcc0= feval(mfilename, y, fs, FP);
-fprintf('%s\n', mfcc0(1));
+%fprintf('%s\n', mfcc0(1));
 fprintf('No. of extracted frames = %d\n', size(mfcc0, 2));
 subplot(3,1,1); surf(mfcc0); box on; axis tight; title(sprintf('MFCC of "%s"', waveFile));
 %FP.useDelta=1;
@@ -111,18 +113,32 @@ fcenter=filterBankParam(2,:);
 fstop=filterBankParam(3,:);
 % Triangular bandpass filter.
 for i=1:P
-    if (i == 1)
-   fprintf ('Pouet : start = %d  center = %d\n', fstart(i), fcenter(i));
-    end
+
+    %fprintf ('Pouet : start = %d  center = %d\n', fstart(i), fcenter(i));
+   %fprintf ('#%d start = %d, center = %d, stop = %d\n', i, fstart(i), fcenter(i), fstop(i));
+
+
    for j = fstart(i):fcenter(i),
       filtmag(j) = (j-fstart(i))/(fcenter(i)-fstart(i));
    end
    for j = fcenter(i)+1:fstop(i),
       filtmag(j) = 1-(j-fcenter(i))/(fstop(i)-fcenter(i));
    end
+
    tbfCoef(i) = sum(fftMag(fstart(i):fstop(i)).*filtmag(fstart(i):fstop(i))');
+
+   if (i == 1)
+       fprintf ('#%d (%d -> %d -> %d) filter_value = %d\n', i, fstart(i), fcenter(i), fstop(i), tbfCoef(i));
+       %for k = fstart(i):fstop(i),
+       %     fprintf ('%d * %d + ', fftMag (k), filtmag (k));
+       %end
+       %fprintf ('\n');
+   end
+
 end
-tbfCoef=log(eps+tbfCoef.^2);
+   %fprintf('-------------------\n');
+
+%tbfCoef=log(eps+tbfCoef.^2);
 
 % === TBF coefficients to MFCC
 function mfcc = melCepstrum(L, P, tbfCoef)
@@ -130,7 +146,10 @@ function mfcc = melCepstrum(L, P, tbfCoef)
 for i = 1:L
    coef = cos((pi/P)*i*(linspace(1,P,P)-0.5))';
    mfcc(i) = sum(coef.*tbfCoef');
+   fprintf ('%d ', mfcc(i));
 end
+fprintf('\n-------------------\n');
+
 
 % === Delta function
 function parameter = deltaFunction(deltaWindow,parameter)
@@ -168,8 +187,8 @@ FP.useCMS = 1;            %Cepstral Mean Substraction, 0, 1(cms of all), 2(overl
 FP.testNum = 4;            % test sentence number, others is train sentences.
 FP.alpha = 1;            % For VTLN
 FP.frameSize = fs/(8000/256);    % Frame size
-fprintf('%d\n', FP.frameSize);
-FP.frameSize = 128;
+fprintf('FS = %d\n', FP.frameSize);
+%FP.frameSize = 120;
 FP.overlap = round(FP.frameSize/3);    % Frame overlap
 FP.filterNum = 20;        % Number of triangular filter bank
 FP.mfccDim = 20;        % Dimension of MFCC
@@ -192,6 +211,12 @@ frameCount = floor((length(y)-overlap)/step);
 out = zeros(frameSize, frameCount);
 for i=1:frameCount,
     startIndex = (i-1)*step+1;
+    if (i == 10)
+
+        for j=startIndex:startIndex+frameSize-1,
+            %fprintf ('#%d  %d\n', j, y(j));
+        end
+    end
     out(:, i) = y(startIndex:(startIndex+frameSize-1));
 end
 
@@ -208,16 +233,22 @@ if nargin<4, plotOpt=0; end
 maxMelFreq = freq2mel(fs/2);
 
 sideWidth=maxMelFreq/(filterNum+1);
+
+fprintf ('side_width = %d, maxMelFreq = %d\n', sideWidth, maxMelFreq);
 index=0:filterNum-1;
+
+%fprintf ('TEST\n');
+%fprintf('%d\n', [index; index+1; index+2]);
+%fprintf ('END TEST\n');
 
 filterBankParam=floor(mel2freq([index; index+1; index+2]*sideWidth)/fs*frameSize)+1;
 
-fprintf ('DAAAAAAAAAAAAAAAAA 1\n');
-fprintf ('%d\n', filterBankParam);
-filterBankParam(end, end)= frameSize/2;    % ??????
-fprintf ('DAAAAAAAAAAAAAAAAA 2\n');
-fprintf ('%d\n', filterBankParam);
-fprintf ('DAAAAAAAAAAAAAAAAA 3\n');
+%fprintf ('DAAAAAAAAAAAAAAAAA 1\n');
+%fprintf ('%d\n', filterBankParam);
+%filterBankParam(end, end)= frameSize/2;    % ??????
+%fprintf ('DAAAAAAAAAAAAAAAAA 2\n');
+%fprintf ('%d\n', filterBankParam);
+%fprintf ('DAAAAAAAAAAAAAAAAA 3\n');
 
 
 if plotOpt

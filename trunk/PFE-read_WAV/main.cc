@@ -13,14 +13,25 @@ int		main(int argc, char *argv[])
 
 	fftw_complex*  out;
 
-	out = wav->compute_fft (split_index);
-    
+	out = wav->compute_fft2 (split_index);
+
     v_int_int&  indexes = wav->get_filters_bank_params ();
     v_double&   mel_coeffs = wav->tri_band_filters (out, *(indexes[0]), *(indexes[1]), *(indexes[2]));
+    v_double&   coeffs = wav->compute_dct2 (mel_coeffs);
+
+    for (int i = 0; i < coeffs.size (); ++i)
+	{
+		std::cout << i << " " << coeffs[i] << std::endl;
+	}
+
+    /*for (int i = 0; i < indexes[0]->size (); ++i)
+    {
+        std::cout << (i + 1) << " start = " << (*indexes[0])[i] << ", center = " << (*indexes[1])[i] << ", stop = " << (*indexes[2])[i] << std::endl;
+    }*/
 
     /*for (int i = 0; i < mel_coeffs.size (); ++i)
 	{
-		std::cout << i << " " << mel_coeffs[i] << std::endl;
+		std::cout << (i + 1) << " " << mel_coeffs[i] << std::endl;
 	}*/
 
     //wav->compute_mel_scale (out, split_index);

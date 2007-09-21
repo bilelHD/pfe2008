@@ -8,7 +8,7 @@
 */
 # define    START_FREQ          200
 # define    END_FREQ            3500
-# define    NB_FILTERS          10
+# define    NB_FILTERS          20
 # define    STEP_FILTER         0.2
 # define 	FILTER_HEIGHT       10
 
