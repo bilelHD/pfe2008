@@ -1,5 +1,5 @@
 ===21 Septembre 2007===
-  * MFCC : Comparaison différents calculs : tester pour d'autres tranches
+  * MFCC : Obtenir le meme resultat que HTK : tester pour d'autres tranches
   * MFCC : Ajouter gestion de tranche de taille < 128 (avec des doubles au lieu d'entiers, et des interpolations pour les valeurs des FFT). Si si Julien...
   * Utiliser le corpus SCRIBE avec HTK
 
@@ -10,6 +10,7 @@
 
 
 
+ 
  
  
  
