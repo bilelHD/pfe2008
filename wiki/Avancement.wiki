@@ -1,10 +1,10 @@
 =Modèle acoustique=
 
 ==Calcul des MFCC==
+===Implemention===
   * Découpage du signal en tranche
   * Calcul du MFCC pour chacune des tranches
   * MFCC = FFT + MEL + FILTERS + DCT
-
 || || *Codé* || *Testé* ||
 || FFT || [http://www.mezimages.com/up/09/543337-button_ok.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
 || MEL || [http://www.mezimages.com/up/09/543337-button_ok.gif] || [http://www.mezimages.com/up/09/543341-button_cancel.gif] ||
@@ -69,6 +69,9 @@
 
 
 
+ 
+ 
+ 
  
  
  
