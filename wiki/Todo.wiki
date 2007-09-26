@@ -1,4 +1,4 @@
-===21 Septembre 2007===
+===26 Septembre 2007===
   * SCRIBE avec HTK : faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE
   * SCRIBE avec HTK : Création des fichiers prototypes des modèles de markov (passés en entrée de HInit)
 
