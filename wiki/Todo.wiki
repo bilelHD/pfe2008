@@ -1,13 +1,12 @@
 ===21 Septembre 2007===
-  * SCRIBE avec HTK : Faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE)
+  * SCRIBE avec HTK : faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE
   * SCRIBE avec HTK : Création des fichiers prototypes des modèles de markov (passés en entrée de HInit)
-  * SCRIBE avec HTK : Faire fonctionner HInit
 
 ===21 Septembre 2007===
   * MFCC : Obtenir le meme resultat que HTK : tester pour d'autres tranches [http://www.mezimages.com/up/09/543341-button_cancel.gif]
   * MFCC : Ajouter gestion de tranche de taille < 128 (avec des doubles au lieu d'entiers, et des interpolations pour les valeurs des FFT). Si si Julien... [http://www.mezimages.com/up/09/543341-button_cancel.gif]
-  * SCRIBE avec HTK : Le format audio (wav sans l'entete est'il lisible par HTK)? [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^A voir^
-  * SCRIBE avec HTK : Format des fichiers de transcription a modifier pour HTK? [http://www.mezimages.com/up/09/543337-button_ok.gif] ^Oui et cela peut se faire grace au module HLabel^
+  * Utiliser le corpus SCRIBE avec HTK : le format audio (wav sans l'entete est'il lisible par HTK)? 
+  * Utiliser le corpus SCRIBE avec HTK : format des fichiers de transcription a modifier pour HTK?
 
 ===Avant===
   * MFCC : Faire fonctionner le programme PERL [http://www.mezimages.com/up/09/543341-button_cancel.gif]  ^J'y arrive po^
