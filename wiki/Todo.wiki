@@ -6,8 +6,8 @@
   * Rien de nouveau, beaucoup de retard dans ce qui précède.
 
 ===26 septembre 2007===
-  * SCRIBE avec HTK : Faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^3 octobre : passé toute l'aprèm à tenter de compiler. Finalement ça fonctionne (la compilationm, en utilisant le makefile qui crée les autres exe), mais ça plante. A terminer donc.5 octobre : lopen ne plante plus mais lsave plante.^
-  * SCRIBE avec HTK : Création des fichiers prototypes des modèles de markov (passés en entrée de HInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^Incompatible avec le fichier mfc.^
+  * SCRIBE avec HTK : Faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^3 octobre : passé toute l'aprèm à tenter de compiler. Finalement ça fonctionne (la compilationm, en utilisant le makefile qui crée les autres exe), mais ça plante. A terminer donc. 5 octobre : lopen ne plante plus mais lsave plante.^
+  * SCRIBE avec HTK : Création des fichiers prototypes des modèles de markov (passés en entrée de HInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^5 octobre : Incompatible avec le fichier mfc.^
   * SCRIBE avec HTK : Faire fonctionner HInit [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^5 octobre : fichier mfc créé à partir d'un wav avec Hcopy. Prob de compatibilité avec le fichier de prototype. Format SCRIBE pour les label?^
 
 ===21 septembre 2007===
