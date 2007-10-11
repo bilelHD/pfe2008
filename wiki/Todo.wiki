@@ -7,7 +7,7 @@
 
 ===5 octobre 2007===
   * SCRIBE avec HTK : Faire fonctionner HRest (étape suivant hInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] 
-       * *8 octobre* ,,a quoi ça sert exactement? Pour l'instant on est passé de HInit à HVite (apprentissage à reconnaissance),,
+       * *8 octobre* ,,a quoi ça sert exactement? Pour l'instant on est passé direct de HInit à HVite (apprentissage à reconnaissance),,
   * Pres de fin de projet [http://www.mezimages.com/up/09/543341-button_cancel.gif] ,,On verra plus tard,,
 
 ===3 octobre 2007===
