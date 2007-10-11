@@ -1,12 +1,12 @@
 ===8 et 10 octobre 2007===
   * Dictionnaire dict pour HVite?
-  * Faire fonctionner HVite (reconnait à partir des HMM)
-  * Faire fonctionner HResult (teste l'efficacité de l'apprentissage - utilise donc Hvite)
+  * SCRIBE avec HTK : Faire fonctionner HVite (reconnait à partir des HMM)
+  * SCRIBE avec HTK : Faire fonctionner HResult (teste l'efficacité de l'apprentissage - utilise donc Hvite)
   * Qu'est ce que ça change d'utiliser l'un ou l'autre des fichiers de label ? (yen a plusieurs pour chaque fichier audio dans SCRIBE)
   * Nombre d'état du modèle de markov (quoi choisir)?
 
 ===5 octobre 2007===
-  * Faire fonctionner HRest (étape suivant hInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] 
+  * SCRIBE avec HTK : Faire fonctionner HRest (étape suivant hInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] 
        * *8 octobre* ,,a quoi ça sert exactement? Pour l'instant on est passé de HInit à HVite (apprentissage à reconnaissance),,
   * Pres de fin de projet [http://www.mezimages.com/up/09/543341-button_cancel.gif] ,,On verra plus tard,,
 
