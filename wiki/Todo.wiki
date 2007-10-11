@@ -1,3 +1,8 @@
+===8 et 10 octobre 2007===
+  * Dictionnaire dict pour HVite?
+  * Faire fonctionner HVite (reconnait à partir des HMM)
+  * Faire fonctionner HResult (teste l'efficacité de l'apprentissage - utilise donc Hvite)
+
 ===5 octobre 2007===
   * Faire fonctionner HRest (étape suivant hInit)
   * Pres de fin de projet
