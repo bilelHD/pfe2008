@@ -6,15 +6,21 @@
   * Nombre d'état du modèle de markov (quoi choisir)?
 
 ===5 octobre 2007===
-  * Faire fonctionner HRest (étape suivant hInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] *8 octobre* ^a quoi ça sert exactement? Pour l'instant on est passé de HInit à HVite (apprentissage à reconnaissance)^
-  * Pres de fin de projet [http://www.mezimages.com/up/09/543341-button_cancel.gif] ^On verra plus tard^
+  * Faire fonctionner HRest (étape suivant hInit) [http://www.mezimages.com/up/09/543341-button_cancel.gif] 
+       * *8 octobre* ,,a quoi ça sert exactement? Pour l'instant on est passé de HInit à HVite (apprentissage à reconnaissance),,
+  * Pres de fin de projet [http://www.mezimages.com/up/09/543341-button_cancel.gif] ,,On verra plus tard,,
 
 ===3 octobre 2007===
   * Rien de nouveau, beaucoup de retard dans ce qui précède. [http://www.mezimages.com/up/09/543337-button_ok.gif]
 
 ===26 septembre 2007===
-  * SCRIBE avec HTK : Faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE [http://www.mezimages.com/up/09/543341-button_cancel.gif] *3 octobre* ^passé toute l'aprèm à tenter de compiler. Finalement ça fonctionne (la compilationm, en utilisant le makefile qui crée les autres exe), mais ça plante. A terminer donc.^ *5 octobre* ^lopen ne plante plus mais lsave plante.^ *8 octobre* ^pas avancé : on arrête pour l'instant car inutile, les outils (les exe) HTK tels que HInit, utilise directement le module pour convertir des fichiers de labels au format SCRIBE (suffit de spécifier ça en option du programme^
-  * SCRIBE avec HTK : Création des fichiers prototypes des modèles de markov (passés en entrée de HInit) [http://www.mezimages.com/up/09/543337-button_ok.gif] *5 octobre* ^Utilisation du fichier d'exemple de la doc htk mais incompatible avec le fichier mfc.^ *10 octobre* ^En fait c'est ok^
+  * SCRIBE avec HTK : Faire fonctionner le module HLABEL (pour générer les MLF à partir des fichier SCRIBE [http://www.mezimages.com/up/09/543341-button_cancel.gif] 
+       * *3 octobre* ,,passé toute l'aprèm à tenter de compiler. Finalement ça fonctionne (la compilationm, en utilisant le makefile qui crée les autres exe), mais ça plante. A terminer donc.,,
+       * *5 octobre* ,,lopen ne plante plus mais lsave plante.,,
+       * *8 octobre* ,,pas avancé : on arrête pour l'instant car inutile, les outils (les exe) HTK tels que HInit, utilise directement le module pour convertir des fichiers de labels au format SCRIBE (suffit de spécifier ça en option du programme),,
+  * SCRIBE avec HTK : Création des fichiers prototypes des modèles de markov (passés en entrée de HInit) [http://www.mezimages.com/up/09/543337-button_ok.gif]
+       * *5 octobre* ,,Utilisation du fichier d'exemple de la doc htk mais incompatible avec le fichier mfc.,,
+       * *10 octobre* ,,En fait c'est ok (attention toutefois de ne pas oublier la première ligne un peu bizarre à première vue),,
   * SCRIBE avec HTK : Faire fonctionner HInit [http://www.mezimages.com/up/09/543337-button_ok.gif] *5 octobre* ^fichier mfc créé à partir d'un wav avec Hcopy. Prob de compatibilité avec le fichier de prototype. Format SCRIBE pour les label?^ *10 octobre* ^Oui pour le format SCRIBE. Fichier de prototype ok finalement. Tout fonctionne. En fait 2 manière d'utiliser l'outil : soit on fournit une liste de fichier son très court constituant chacun un exemple de la chose à apprendre (seulement la chose), soit on fournit des fichier son plus long contenant plus de choses, avec les fichiers de label associé afin que HTK retrouve les morceaux qui vont lui servir pour évaluer les coefficient du modèle de markov. On utilise la deuxième solution, avec le corpus scribe, après avoir créé le mfc à partir des SES.^ 
 
 ===21 septembre 2007===
