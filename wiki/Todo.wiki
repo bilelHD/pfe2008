@@ -33,24 +33,3 @@
   * MFCC : Faire fonctionner le programme PERL [http://www.mezimages.com/up/09/543341-button_cancel.gif]  ^J'y arrive po^
   * MFCC : Obtenir le meme resultat que le programme matlab. [http://www.mezimages.com/up/09/543337-button_ok.gif]  ^En retirant des optimisations tels que hammings ou un log^
   * MFCC : Obtenir le meme resultat que HTK [http://www.mezimages.com/up/09/543337-button_ok.gif]  ^Pareil à priori (sur la première tranche)^
-
-
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
