@@ -18,7 +18,7 @@
   * [http://www.eurasip.org/content/Eusipco/1996/paper/psr_13.pdf Sur le calcul des mfcc... parle de HTK... je sais pas si c'est utile]
 
 =FFT=
-  * http://www.polytech.unice.fr/~leroux/courssignal/node73.html
+  * [http://www.polytech.unice.fr/~leroux/courssignal/node73.html Les limitations en résolution de la transformée de Fourier discrète]
   * [http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/ref/fft.html&http://www.google.com/search?client=opera&rls=fr&q=matlab+fft&sourceid=opera&ie=utf-8&oe=utf-8 Bon exemple en matlab pour comprendre la fft (et comment etendre le resultat)]
 
 =Corpus (Anglais)=
