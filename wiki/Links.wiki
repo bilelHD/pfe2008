@@ -5,7 +5,7 @@
   * [http://themarvinproject.free.fr/final/node4.html Cours de traitement du signal (calcul des MFCC...)]
   * [http://maxwell.me.gu.edu.au/spl/publications/papers/merc03_ben.pdf PDF : A Comparative Study of Filter Bank Spacing for Speech Recognition]
   * [http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf PDF : Development of a Speech Transcription (utilise HTK)]
-  * http://www.d.umn.edu/~cprince/PubRes/EpiRob06/pdf/FeaturalProcessing.pdf
+  * [http://www.d.umn.edu/~cprince/PubRes/EpiRob06/pdf/FeaturalProcessing.pdf PDF (slides) : Audio Processing]
 
   * [http://140.114.76.148/jang/matlab/toolbox/audioProcessing/html/audioProcessing/index.html Sources matlab de calcul de mfcc]
   * [http://search.cpan.org/src/DJHD/Speech-Recognizer-SPX-0.0801/FE/ Sources Perl de calcul de mfcc]
