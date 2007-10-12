@@ -3,8 +3,7 @@
 
 =MFCC=
   * [http://themarvinproject.free.fr/final/node4.html Cours de traitement du signal (calcul des MFCC...)]
-  * [http://maxwell.me.gu.edu.au/spl/publications/papers/merc03_ben.pdf A Comparative Study of Filter Bank Spacing for
-Speech Recognition]
+  * [http://maxwell.me.gu.edu.au/spl/publications/papers/merc03_ben.pdf PDF : A Comparative Study of Filter Bank Spacing for Speech Recognition]
   * http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf
   * http://www.d.umn.edu/~cprince/PubRes/EpiRob06/pdf/FeaturalProcessing.pdf
 
