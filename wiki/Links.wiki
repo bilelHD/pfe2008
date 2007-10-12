@@ -2,7 +2,7 @@
   * [http://www.utdallas.edu/~loizou/speech/colea.htm Colea : outil matlab utilisé par Reda dans son cours pour visualiser des signals audio, des spectrogrammes, des transformées de fourier...]
 
 =MFCC=
-  * http://themarvinproject.free.fr/final/node4.html
+  * [http://themarvinproject.free.fr/final/node4.html Cours de traitement du signal (calcul des MFCC...)]
   * http://maxwell.me.gu.edu.au/spl/publications/papers/merc03_ben.pdf
   * http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf
   * http://www.d.umn.edu/~cprince/PubRes/EpiRob06/pdf/FeaturalProcessing.pdf
