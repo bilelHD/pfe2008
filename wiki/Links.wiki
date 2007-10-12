@@ -1,6 +1,9 @@
 =Outils traitement du son==
   * [http://www.utdallas.edu/~loizou/speech/colea.htm Colea : outil matlab utilisé par Reda dans son cours pour visualiser des signals audio, des spectrogrammes, des transformées de fourier...]
 
+=HTK=
+  * [http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf PDF : Development of a Speech Transcription (utilise HTK)]
+
 =MFCC=
   * [http://themarvinproject.free.fr/final/node4.html Cours de traitement du signal (calcul des MFCC...)]
   * [http://maxwell.me.gu.edu.au/spl/publications/papers/merc03_ben.pdf PDF : A Comparative Study of Filter Bank Spacing for Speech Recognition]
