@@ -9,7 +9,7 @@ using namespace std;
 int		main(int argc, char *argv[])
 {
     Wav*		   wav = new Wav("ane.wav");
-    int             split_index = 0;
+    int             split_index = 61;
 
 	fftw_complex*  out;
 

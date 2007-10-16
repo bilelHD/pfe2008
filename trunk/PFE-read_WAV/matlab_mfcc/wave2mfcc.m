@@ -62,8 +62,8 @@ for i = 1:size(framedY, 2),
 
     % ====== Sixth Step: cosine transform. (Using DCT to get L order mel-scale-cepstrum parameters.)
     mfcc = melCepstrum(FP.mfccDim, FP.filterNum, tbfCoef);
-    if (i == 1)
-        %fprintf('%s\n', mfcc);
+    if (i == 62)
+        fprintf('%s\n', mfcc);
     end
 
     parameter = [parameter mfcc'];
@@ -98,7 +98,7 @@ mfcc0 = wave2mfcc(y, fs, FP);
 %mfcc0= feval(mfilename, y, fs, FP);
 %fprintf('%s\n', mfcc0(1));
 fprintf('No. of extracted frames = %d\n', size(mfcc0, 2));
-subplot(3,1,1); surf(mfcc0); box on; axis tight; title(sprintf('MFCC of "%s"', waveFile));
+%subplot(3,1,1); surf(mfcc0); box on; axis tight; title(sprintf('MFCC of "%s"', waveFile));
 %FP.useDelta=1;
 %mfcc1=feval(mfilename, y, fs, FP);
 %subplot(3,1,2); surf(mfcc1); box on; axis tight; title(sprintf('MFCC of "%s"', waveFile));
@@ -128,7 +128,7 @@ for i=1:P
    tbfCoef(i) = sum(fftMag(fstart(i):fstop(i)).*filtmag(fstart(i):fstop(i))');
 
    if (i == 1)
-       fprintf ('#%d (%d -> %d -> %d) filter_value = %d\n', i, fstart(i), fcenter(i), fstop(i), tbfCoef(i));
+       %fprintf ('#%d (%d -> %d -> %d) filter_value = %d\n', i, fstart(i), fcenter(i), fstop(i), tbfCoef(i));
        %for k = fstart(i):fstop(i),
        %     fprintf ('%d * %d + ', fftMag (k), filtmag (k));
        %end
@@ -146,9 +146,7 @@ function mfcc = melCepstrum(L, P, tbfCoef)
 for i = 1:L
    coef = cos((pi/P)*i*(linspace(1,P,P)-0.5))';
    mfcc(i) = sum(coef.*tbfCoef');
-   fprintf ('%d ', mfcc(i));
 end
-fprintf('\n-------------------\n');
 
 
 % === Delta function

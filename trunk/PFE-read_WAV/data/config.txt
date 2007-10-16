@@ -1,0 +1,7 @@
+# Wave -> MFCC config file
+SOURCEFORMAT = WAV # same as -F TIMIT
+TARGETKIND = MFCC # MFCC + Energy + Deltas
+TARGETRATE = 100000 # 10ms frame rate
+WINDOWSIZE = 200000 # 20ms window
+NUMCHANS = 20 # num filterbank chans
+NUMCEPS = 20 # compute c1 to c8
