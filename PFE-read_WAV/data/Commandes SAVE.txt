@@ -1,0 +1,9 @@
+HCopy.exe -F WAV labels/pouet.wav labels/pouet.htk_wav
+
+HCopy.exe -C config_hcopy.txt labels/pouet.htk_wav labels/pouet.mfc
+
+HInit.exe -L labels hmm.txt labels/pouet.mfc
+
+HInit.exe -G SCRIBE -l ta  -L "labels/labs" hmm.txt -S labels/trainlist.cfg
+
+HVite -T 1 -i results -w wdnet beep/beep-1.0 hmmlist.cfg labels/AMFTA004.wav_htk.wav.mfc

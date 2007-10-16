@@ -1,0 +1,38 @@
+LHD: V4.0
+FIL: LABEL
+TYP: ORTHOGRAPHIC
+DBN: SCRIBE
+VOL: SCRIBE_1
+DIR: SCRIBE\DR1_PM\FT\MAM\
+SRC: AMFTA001.SES
+TXF: AMFTA001.SET
+SAM: 20000
+BEG: 0
+END: 700000
+RED: -
+RET: -
+REP: -
+SNB: 2
+SBF: 01
+SSB: 16
+RCC: -
+NCH: 2
+SPI: -
+PCF: -
+PCN: -
+EXP: -
+SYS: -
+DAT: 1990
+SPA: -
+LBD:
+LBR: 4000, 92000, 0, -32768, 32767, The earth used to be flat but now it's a
+EXT:  sphere.
+LBR: 141000, 243000, 0, -32768, 32767, The children camouflaged themselves with
+EXT:  some khaki cloth which their dad had found in the garage.
+LBR: 268000, 329000, 0, -32768, 32767, This guy helps Mr. Yates develop his own
+EXT:  photographs.
+LBR: 381000, 461000, 0, -32768, 32767, Once I've varnished the bedside table I
+EXT:  can start on the wardrobe.
+LBR: 509000, 579000, 0, -32768, 32767, Jean might prepare more salmon and
+EXT:  cucumber sandwiches if we're lucky.
+ELF:

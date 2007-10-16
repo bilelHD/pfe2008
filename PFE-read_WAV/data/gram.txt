@@ -1,0 +1,8 @@
+$digit = ONE | TWO | THREE | FOUR | FIVE |
+SIX | SEVEN | EIGHT | NINE | OH | ZERO;
+$name = [ CAT ] WHY |
+[ JULIAN ] DOG |
+[ DAVE ] HOUSE |
+[ PHIL ] OLD |
+[ STEVE ] YOUNG;
+( SENT ( DIAL <$digit> | (PHONE|CALL) $name) SENT )
