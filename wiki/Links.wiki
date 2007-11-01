@@ -3,6 +3,7 @@
 
 =HTK=
   * [http://ohm.nuigalway.ie/0607/03oconnor/docs/Progress_Report.pdf PDF : Development of a Speech Transcription (utilise HTK)]
+  * [http://www.fon.hum.uva.nl/david/ba_shs/educational_dutch_speechRecognizer_FinalReport2004.pdf Un rapport de reconnaissance vocale utilisant HTK ]
 
 =MFCC=
   * [http://themarvinproject.free.fr/final/node4.html Cours de traitement du signal (calcul des MFCC...)]
