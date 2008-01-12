@@ -47,7 +47,7 @@ Wav::Wav(std::string filename)
         for (int i = 0; i < data_length_; ++i)
         {
             data_[i] = (double) (data_short[i]) / max_amplitude;
-			//std::cout << data_[i] << std::endl;
+			std::cout << data_[i] << std::endl;
 		}
 	}
     // 32 bits (= 4 bytes) per sample

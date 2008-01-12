@@ -1,3 +1,5 @@
+
+
 HCopy.exe -F WAV labels/pouet.wav labels/pouet.htk_wav
 
 HCopy.exe -C config_hcopy.txt labels/pouet.htk_wav labels/pouet.mfc
