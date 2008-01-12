@@ -1,0 +1,12 @@
+[]	#
+Ar	@
+D	D
+E	e
+F	f
+H	h
+M	m
+N	n
+R	r
+S	s
+V	v
+W	v
